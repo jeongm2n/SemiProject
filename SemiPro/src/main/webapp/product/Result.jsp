@@ -74,12 +74,17 @@
 			String many = rs.getString("many");
 			String company = rs.getString("company");
 			String img = rs.getString("img");%>
-			<table style="text-align:center">
-				<tr><td><img src=../img/<%=img %> style="width:300px;heigth:200px"></td></tr>
-				<tr><td><%=name %></td></tr>
-				<tr><td>재고:<%=many %></td></tr>
-				<tr><td>납품업체:<%=company %></td></tr>
+			<div class="div">
+			<form>
+			<table style="width:100%;text-align:center;vertical-align:center">
+				<tr><td><img src="../img/<%=img %>" style="width:300px;heigth:200px"/></td>
+				<td>상품명 : <%=name %></td>
+				<td>재고 : <%=many %></td>
+				<td>납품업체 : <%=company %></td>
+				<td><input type="text" style="width:50px"/>개<br><br><input type="submit" value="구매"/></td></tr>
 			</table>
+			</form>
+			</div>
 		<%}
 		%>
 	

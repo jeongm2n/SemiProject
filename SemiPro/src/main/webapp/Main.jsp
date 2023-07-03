@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@page session="true"%>
+<%@ include file="../dbconn.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,33 +72,7 @@
 		<button style="width:100%;bgcolor:white" onclick="goBottom()">Bottom<br>맨 아래로</button>
 	</div>
 	<section>
-	<h1>당근</h1><br>
-	<h2>양파</h2><br>
-	<h3>돼지고기</h3><br>
-	<h4>소고기</h4><br>
-	<h5>우유</h5><br>
-	<h6>계란</h6><br>
-	간장<br>
-	참기름<br>
-	물<br>
-	식용유<br>
-	<br>
-	고추장<br>
-	<br>
-	된장<br>
-	<br>
-	소금<br>
-	<br>
-	설탕<br>
-	<br>
-	맛술<br>
-	<br>
-	식초<br>
-	<br>
-	마요네즈<br>
-	<br>
-	케찹<br>
-	<br>
+	<h1>전체 상품</h1>
 	
 	</section>
 </div>

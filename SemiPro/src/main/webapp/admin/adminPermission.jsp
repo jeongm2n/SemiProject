@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
+<title>납품업체 관리</title>
 <link rel="stylesheet" href="../css/admincss.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
@@ -38,8 +38,8 @@
 	<header class="shadow">MLP&nbsp;쇼핑몰</header>
 	<nav>
 		<ul id="menu">
-			<li id="menu_li"><button style="background-color:#BCC6CC;color:white;" onclick="location.href='./adminMain.jsp'">회원관리</button>
-			<li id="menu_li"><button onclick="location.href='./adminProductor.jsp'">납품자관리</button>
+			<li id="menu_li"><button onclick="location.href='./adminMain.jsp'">회원관리</button>
+			<li id="menu_li"><button style="background-color:#BCC6CC;color:white;" onclick="location.href='./adminProductor.jsp'">납품자관리</button>
 			<li id="menu_li"><button onclick="location.href='./adminProduct.jsp'">식자재관리</button>
 			<li id="menu_li"><button onclick="location.href='./adminPurchase.jsp'">거래내역</button>
 		</ul>
@@ -51,22 +51,25 @@
 	</div>
 	
 	<aside>
-		<ul>
-			<li><b>회원관리</b></li>
+		<ul style="padding-left:5px;padding-top:20px;">
+			<li><a href="./adminProductor.jsp"><b>납품 업체 관리</b></a></li><br>
+			<li><a href="./adminPermission.jsp"><b>등록 승인/승인취소</b></a></li>
 		</ul>
 	</aside>
 	
 	<section>
 	<table>
-		<tr style="text-align:center;background:rgb(111,167,235);"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>전화번호</th><th>주소</th><th></th></tr>
-	<% String sql="select * from customer";
+	<caption><b>승인 대기중</b></caption>
+		<tr style="text-align:center;background:rgb(111,167,235);"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>기업명</th><th></th><th></th></tr>
+	<% String sql="select * from regist"; /* 승인 전 테이블인 before_regist의 정보 가져옴 */
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();
 	
 	while(rs.next()){%>
-		<tr style="text-algin:center"><td><%=rs.getString("id") %></td><td><%=rs.getString("pwd") %></td><td><%=rs.getString("name") %></td>
-		<td><%=rs.getString("email") %></td><td><%=rs.getString("tel") %></td><td><%=rs.getString("address") %></td>
-		<td><button>삭제</button></td></tr>
+		<tr style="text-align:center"><td><%=rs.getString("id") %></td><td><%=rs.getString("pwd") %></td><td><%=rs.getString("name") %></td>
+		<td><%=rs.getString("email") %></td><td><%=rs.getString("company") %></td>
+		<td><button onclick="location.href='./permission_result.jsp?result=yes&id=<%=rs.getString("id")%>'">승인</button></td>
+		<td><button onclick="location.href='./permission_result.jsp?result=no&id=<%=rs.getString("id")%>'">승인취소</button></td></tr>
 	<%}%>
 	</table>
 	</section>

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
+<title>거래내역 관리</title>
 <link rel="stylesheet" href="../css/admincss.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
@@ -38,10 +38,10 @@
 	<header class="shadow">MLP&nbsp;쇼핑몰</header>
 	<nav>
 		<ul id="menu">
-			<li id="menu_li"><button style="background-color:#BCC6CC;color:white;" onclick="location.href='./adminMain.jsp'">회원관리</button>
+			<li id="menu_li"><button onclick="location.href='./adminMain.jsp'">회원관리</button>
 			<li id="menu_li"><button onclick="location.href='./adminProductor.jsp'">납품자관리</button>
 			<li id="menu_li"><button onclick="location.href='./adminProduct.jsp'">식자재관리</button>
-			<li id="menu_li"><button onclick="location.href='./adminPurchase.jsp'">거래내역</button>
+			<li id="menu_li"><button style="background-color:#BCC6CC;color:white;" onclick="location.href='./adminPurchase.jsp'">거래내역</button>
 		</ul>
 	</nav>
 	
@@ -51,22 +51,26 @@
 	</div>
 	
 	<aside>
-		<ul>
-			<li><b>회원관리</b></li>
+		<ul style="padding-left:5px;padding-top:20px;">
+			<li><b>거래내역관리</b></li>
 		</ul>
 	</aside>
 	
 	<section>
-	<table>
-		<tr style="text-align:center;background:rgb(111,167,235);"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>전화번호</th><th>주소</th><th></th></tr>
-	<% String sql="select * from customer";
+	<table style="text-align:center">
+	<caption><b style="font-size:20pt">거래내역</b></caption>
+	<tr><th>고객id</th><th>구매상품</th><th>구매수량</th><th>납품자id</th><th>장기거래여부</th><th>구매일자</th></tr>
+	<%String sql = "SELECT * FROM purchase";
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();
-	
-	while(rs.next()){%>
-		<tr style="text-algin:center"><td><%=rs.getString("id") %></td><td><%=rs.getString("pwd") %></td><td><%=rs.getString("name") %></td>
-		<td><%=rs.getString("email") %></td><td><%=rs.getString("tel") %></td><td><%=rs.getString("address") %></td>
-		<td><button>삭제</button></td></tr>
+
+	while(rs.next()){
+		String fulldate = rs.getString("date");
+		String date = fulldate.substring(0,10);%>
+		<tr><td><%=rs.getString("customer_id") %></td><td><%=rs.getString("name") %></td>
+		<td><%=rs.getString("many") %></td><td><%=rs.getString("productor_id") %></td>
+		<td><%=rs.getString("subscribe") %></td><td><%=date %></td></tr>
+			
 	<%}%>
 	</table>
 	</section>
