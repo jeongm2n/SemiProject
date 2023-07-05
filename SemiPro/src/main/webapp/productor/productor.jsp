@@ -19,11 +19,6 @@
 		  });
 		});
 	 
-	 function validateForm(){
-		 
-  		  return true;
-     }
-	 
 	 function logout(){
 			if(confirm('로그아웃 하시겠습니까?')){
 				alert('로그아웃 되었습니다.');
@@ -33,23 +28,27 @@
 			else{
 				return false;
 			}	
-		}
-	 
+	}
 </script>
+
 </head>
 <body>
 <%
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		session.setAttribute("id", "mirygm");
+		String id = (String)session.getAttribute("id");
 		
-		pstmt = conn.prepareStatement("select * from product");
+		pstmt = conn.prepareStatement("select * from product where productor_id ='" + id + "'");
 	    rs = pstmt.executeQuery();
+	    
+	  
 %>
 
 <div id="wrapper">
 	<button id="btn1" onclick="return logout()">LogOut</button>
 	<header>납품 페이지</header>
-
+</div>
 	<div id="quickmenu">
 	퀵메뉴
 	</div>
@@ -77,14 +76,14 @@
 	</div>
 		
 	<div id="productor_table2">
-		<form name="productorform" action=productor_ok.jsp method=get onsubmit="return validform()" enctype="multipart/form-data">		
+		<form name="productorform" action="${contextPath}../product/addProduct.do"  method="post" enctype="multipart/form-data" >
 		  <br><br><a>납품 입력</a><br><br>
             <table class = "tb2">
 				<tr>
-				 <td>물품명</td><td><input type="text" name="obj_name" id="obj_name"></td>
+				 <td>물품명</td><td><input type="text" name="obj_name" id="obj_name" minlength='1' maxlength='10' required></td>
 				</tr>
 				<tr>
-				 <td>종류</td><td><select name="obj_kind" id="obj_kind">
+				 <td>종류</td><td><select name="obj_kind" id="obj_kind" required>
 									    <option value=""disabled selected>-선택-</option>
 									    <option value="채소">채소</option>
 									    <option value="육류">육류</option>
@@ -94,7 +93,7 @@
 				</td>
 				</tr>
 				<tr>
-				 <td>수량</td><td><input type="text" name="obj_amount" id="obj_amount"></td>
+				 <td>수량</td><td><input type="text" name="obj_amount" id="obj_amount" minlength='1' maxlength='10' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></td>
 				</tr>
 				<tr>
 				 <td>제품 사진</td>
@@ -104,10 +103,10 @@
             			파일 업로드
         			</label>
     			</div>
-				 <input type="file" id="obj_img" name="obj_img" accept="image/*" onchange="loadFile(event)"></td>
+				 <input type="file" id="obj_img" name="obj_img" accept="image/*" required></td>
 				</tr>
 				<tr>
-				 <td>생산일자</td><td><input type="date" name="obj_date" id="obj_date"></td>
+				 <td>생산일자</td><td><input type="date" name="obj_date" id="obj_date"required></td>
 				</tr>
             </table>
         <button type="submit" id="btn2">입력</button>
@@ -116,7 +115,7 @@
 	
 	
 	
-	
-	
+
+<script src="../script/productor.js"></script>	
 </body>
 </html>

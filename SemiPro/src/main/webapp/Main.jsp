@@ -1,8 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.*,Product.*"
+    pageEncoding="UTF-8" isELIgnored="false" %>
     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"  />  
+<%
+request.setCharacterEncoding("UTF-8");
+%>
 <%@page session="true"%>
-<%@ include file="../dbconn.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -60,10 +65,10 @@
 	<header class="shadow">MLP&nbsp;쇼핑몰</header>
 	<nav>
 		<ul id="menu">
-			<li id="menu_li"><button onclick="location.href='./product/Result.jsp?str=채소'">채소</button>
-			<li id="menu_li"><button onclick="location.href='./product/Result.jsp?str=육류'">육류</button>
-			<li id="menu_li"><button onclick="location.href='./product/Result.jsp?str=유제품'">유제품</button>
-			<li id="menu_li"><button onclick="location.href='./product/Result.jsp?str=소스류'">소스류</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=채소'">채소</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=육류'">육류</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=유제품'">유제품</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=소스류'">소스류</button>
 		</ul>
 	</nav>
 	
@@ -74,15 +79,7 @@
 	<section>
 	<h1>전체 상품</h1>
 	<table>
-		<%
-		String sql = "select * from product";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
 		
-		while(rs.next()){
-			
-		}
-		%>
 	</table>
 	</section>
 </div>

@@ -1,8 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.*,Product.*"
+    pageEncoding="UTF-8" isELIgnored="false"%>
     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"  />  
+<%
+request.setCharacterEncoding("UTF-8");
+%>  
+
 <%@page session="true"%>
-<%@ include file="../dbconn.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -58,13 +64,6 @@
 		 }
 	 }
 </script>
-<%
-	String str = request.getParameter("str");
-	String sql = "select product.name,many,img,productor_id,company from product,productor where product.productor_id=productor.id and kind='"+str+"'";
-	
-	PreparedStatement pstmt = conn.prepareStatement(sql);
-	ResultSet rs = pstmt.executeQuery();
-%>
 </head>
 <body>
 <div id="wrapper">
@@ -80,10 +79,10 @@
 	<header class="shadow">MLP&nbsp;쇼핑몰</header>
 	<nav>
 		<ul id="menu">
-			<li id="menu_li"><button onclick="location.href='Result.jsp?str=채소'">채소</button>
-			<li id="menu_li"><button onclick="location.href='Result.jsp?str=육류'">육류</button>
-			<li id="menu_li"><button onclick="location.href='Result.jsp?str=유제품'">유제품</button>
-			<li id="menu_li"><button onclick="location.href='Result.jsp?str=소스류'">소스류</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=채소'">채소</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=육류'">육류</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=유제품'">유제품</button>
+			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=소스류'">소스류</button>
 		</ul>
 	</nav>
 	
@@ -92,36 +91,28 @@
 		<button style="width:100%;bgcolor:white" onclick="goBottom()">Bottom<br>맨 아래로</button>
 	</div>
 	<section>
-		<%
-		while(rs.next()){
-			String name = rs.getString("name");
-			String many = rs.getString("many");
-			String company = rs.getString("company");
-			String img = rs.getString("img");
-			String pro_id = rs.getString("productor_id");%>
+		<c:forEach var="food" items="${productList }">
 			<div class="div">
 				<div style="float:left;width:35%;height:98%;position:relative;overflow:hidden">
-				<img src="../img/<%=img %>"/></div>
+				<img src="../img/${food.img }"/></div>
 				<div style="float:right;width:65%;height:100%;display:table">
-				<form name="purchase" action=Purchase.jsp onSubmit="return login_chk()">
+				<form action=Purchase.jsp onSubmit="return login_chk()">
 				<table style="width:100%;text-align:center;margin-top:12%">
 					<tr>
-					<td><b>상품명</b> : <%=name %></td>
-					<td><b>재고</b> : <%=many %></td>
-					<td><b>납품업체</b> : <%=company %></td>
+					<td><b>상품명</b> : ${food.name }</td>
+					<td><b>재고</b> : ${food.many }</td>
+					<td><b>납품업체</b> : ${food.company }</td>
 					<td>정기구매<br><input type="radio" name="sub" value="o"/>예
 					<input type="radio" name="sub" value="x" checked="checked"/>아니오</td>
 					<td><input type="text" name="num" style="width:50px"/>개<br><br>
-					<input type="hidden" name="name" value="<%=name %>" />
-					<input type="hidden" name="productor_id" value="<%=pro_id %>" />
+					<input type="hidden" name="name" value="${food.name }" />
+					<input type="hidden" name="productor_id" value="${food.id }" />
 					<input type="submit" value="구매"/></td></tr>
 				</table>
 				</form>
 				</div>
 			</div>
-		<%}
-		%>
-	
+		</c:forEach>
 	</section>
 </div>
 </body>
