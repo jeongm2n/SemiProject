@@ -11,6 +11,8 @@
 <title>MLP 쇼핑몰</title>
 <link rel="stylesheet" href="../css/mycss.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<%String user_id = (String)session.getAttribute("id"); %>
 <script>
 	 $(document).ready(function(){
 		  var currentPosition = parseInt($("#quickmenu").css("top"));
@@ -32,10 +34,33 @@
 	 function goBottom(){
 		 window.scrollTo(0,document.body.scrollHeight);
 	 }
+	 
+	 function logout(){
+			if(confirm('로그아웃 하시겠습니까?')){
+				alert('로그아웃 되었습니다.');
+				window.location.href="../login/logout.jsp";
+				return true;
+			}
+			else{
+				return false;
+			}	
+	 }
+	 
+	 function login_chk(){
+		 var login_id = <%=user_id%>;
+		 if(!login_id){
+			 alert('로그인을 먼저 해주세요!');
+			 window.location.href="../login/login.jsp";
+			 return false;
+		 }
+		 else{
+			 return true;
+		 }
+	 }
 </script>
 <%
 	String str = request.getParameter("str");
-	String sql = "select product.name,many,img,company from product,productor where product.productor_id=productor.id and kind='"+str+"'";
+	String sql = "select product.name,many,img,productor_id,company from product,productor where product.productor_id=productor.id and kind='"+str+"'";
 	
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();
@@ -44,12 +69,11 @@
 <body>
 <div id="wrapper">
 	<%
-	String user_id = (String)session.getAttribute("id");
 	if(user_id==null){%>
 		<button style="float:right" onclick="return loginpage()">로그인</button>
 	<%}
 	else{%>
-		<button style="float:right" onclick="logout()">로그아웃</button>
+		<button style="float:right" onclick="return logout()">로그아웃</button>
 	<%}
 %>
 	<button style="float:right" onclick="location.href='../Main.jsp'">홈으로</button>
@@ -73,17 +97,27 @@
 			String name = rs.getString("name");
 			String many = rs.getString("many");
 			String company = rs.getString("company");
-			String img = rs.getString("img");%>
+			String img = rs.getString("img");
+			String pro_id = rs.getString("productor_id");%>
 			<div class="div">
-			<form>
-			<table style="width:100%;text-align:center;vertical-align:center">
-				<tr><td><img src="../img/<%=img %>" style="width:300px;heigth:200px"/></td>
-				<td>상품명 : <%=name %></td>
-				<td>재고 : <%=many %></td>
-				<td>납품업체 : <%=company %></td>
-				<td><input type="text" style="width:50px"/>개<br><br><input type="submit" value="구매"/></td></tr>
-			</table>
-			</form>
+				<div style="float:left;width:35%;height:98%;position:relative;overflow:hidden">
+				<img src="../img/<%=img %>"/></div>
+				<div style="float:right;width:65%;height:100%;display:table">
+				<form name="purchase" action=Purchase.jsp onSubmit="return login_chk()">
+				<table style="width:100%;text-align:center;margin-top:12%">
+					<tr>
+					<td><b>상품명</b> : <%=name %></td>
+					<td><b>재고</b> : <%=many %></td>
+					<td><b>납품업체</b> : <%=company %></td>
+					<td>정기구매<br><input type="radio" name="sub" value="o"/>예
+					<input type="radio" name="sub" value="x" checked="checked"/>아니오</td>
+					<td><input type="text" name="num" style="width:50px"/>개<br><br>
+					<input type="hidden" name="name" value="<%=name %>" />
+					<input type="hidden" name="productor_id" value="<%=pro_id %>" />
+					<input type="submit" value="구매"/></td></tr>
+				</table>
+				</form>
+				</div>
 			</div>
 		<%}
 		%>

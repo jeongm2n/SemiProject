@@ -66,7 +66,7 @@
 	while(rs.next()){%>
 		<tr style="text-algin:center"><td><%=rs.getString("id") %></td><td><%=rs.getString("pwd") %></td><td><%=rs.getString("name") %></td>
 		<td><%=rs.getString("email") %></td><td><%=rs.getString("tel") %></td><td><%=rs.getString("address") %></td>
-		<td><button>삭제</button></td></tr>
+		<td><button onclick="location.href='customerDelete.jsp?id=<%=rs.getString("id") %>'">삭제</button></td></tr>
 	<%}%>
 	</table>
 	</section>

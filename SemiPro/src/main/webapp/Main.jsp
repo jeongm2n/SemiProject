@@ -73,7 +73,17 @@
 	</div>
 	<section>
 	<h1>전체 상품</h1>
-	
+	<table>
+		<%
+		String sql = "select * from product";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()){
+			
+		}
+		%>
+	</table>
 	</section>
 </div>
 </body>

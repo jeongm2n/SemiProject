@@ -15,21 +15,22 @@
 	String user_pwd = request.getParameter("pwd_input");
 	String table = request.getParameter("position");
 	
-	String sql="SELECT id, pwd FROM "+table+" WHERE id='"+user_id+"' AND pwd='"+user_pwd+"'";
+	String sql="SELECT id FROM "+table+" WHERE id='"+user_id+"' AND pwd='"+user_pwd+"'";
 	
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();
 	
 	if(rs.next()){
 		do{
-			session.setAttribute("id",user_id);
+			session.setAttribute("id",rs.getString("id"));
 			String str1 = "<script>alert('로그인에 성공했습니다!');";
 			if(table.equals("customer")){
 				String str2 = str1 + "location.replace('../Main.jsp');</script>";
 				out.println(str2);
 			}
 			else if(table.equals("productor")){
-				
+				String str2 = str1 + "location.replace('../productor/productor.jsp');</script>";
+				out.println(str2);
 			}
 			else if(table.equals("manager")){
 				String str2 = str1 + "location.replace('../admin/adminMain.jsp');</script>";

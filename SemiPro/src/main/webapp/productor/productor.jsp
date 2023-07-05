@@ -23,6 +23,18 @@
 		 
   		  return true;
      }
+	 
+	 function logout(){
+			if(confirm('로그아웃 하시겠습니까?')){
+				alert('로그아웃 되었습니다.');
+				window.location.href="../login/logout.jsp";
+				return true;
+			}
+			else{
+				return false;
+			}	
+		}
+	 
 </script>
 </head>
 <body>
@@ -35,7 +47,7 @@
 %>
 
 <div id="wrapper">
-	<button id="btn1">LogOut</button>
+	<button id="btn1" onclick="return logout()">LogOut</button>
 	<header>납품 페이지</header>
 
 	<div id="quickmenu">
