@@ -33,10 +33,27 @@ public class ProductController extends HttpServlet {
 		productDAO = new ProductDAO();
 	}
 	
-    public ProductController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		String nextPage = null;
+		String action = request.getPathInfo();
+		HttpSession session = request.getSession();
+		String id =	(String)session.getAttribute("id");
+		
+		if (action.equals("/listProducts.do")) 
+		{
+			List<ProductVO> ProductList = productDAO.listProducts(id);
+			request.setAttribute("ProductList", ProductList);
+			nextPage = "../productor/productor.jsp";	
+			
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
+			
+			dispatch.forward(request, response);
+		}
+		
+		doPost(request, response);
+	}
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doHandle(request, response);
@@ -49,25 +66,18 @@ public class ProductController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doHandle(request, response);
 	}
+	
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nextPage = null;
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter writer = response.getWriter();
 		String encoding = "UTF-8";
 		String action = request.getPathInfo();
 		HttpSession session = request.getSession();
 		String id =	(String)session.getAttribute("id");
 	
-		if (action == null || action.equals("/listProducts.do")) 
-		{
-			List<ProductVO> ProductList = productDAO.listProducts(id);
-			request.setAttribute("ProductList", ProductList);
-			nextPage = "../productor/productor.jsp";
-		} 
-	
-		else if (action.equals("/addProduct.do")) {
-			File currentDirPath = new File("C:\\JavaProgram\\Shop\\src\\main\\webapp\\img");
+		if (action.equals("/addProduct.do")) {
+			File currentDirPath = new File("/Users/jeongmin/SemiProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SemiPro/img");
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			factory.setRepository(currentDirPath);
 			factory.setSizeThreshold(1024 * 1024);
@@ -85,16 +95,15 @@ public class ProductController extends HttpServlet {
 						if (fileItem.getSize() > 0) {
 							int idx = fileItem.getName().lastIndexOf("\\");
 							if (idx == -1) {
-								idx = fileItem.getName().lastIndexOf("/");
+								idx = fileItem.getName().lastIndexOf("/"); 
 							}
 							String fileName = fileItem.getName().substring(idx + 1);
-							File uploadFile = new File(currentDirPath + "\\" + fileName);
+							File uploadFile = new File(currentDirPath + "/" + fileName);
 							fileItem.write(uploadFile);
 						} // end if
 					} // end if
 				} // end for
 						     
-		        //Date date = (Date) new SimpleDateFormat("YYYY-MM-DD").parse(Param[4]);  
 				String name = Param[0];
 				String kind = Param[1];
 				String many = Param[2];
@@ -106,14 +115,21 @@ public class ProductController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			nextPage = "/listProducts.do";
+			nextPage = "/product/listProducts.do";
 		}else if(action.equals("/showProducts.do")){
 			String kind = request.getParameter("str");
 			System.out.println("str="+kind);
 			List<ProductVO> productList = productDAO.showProducts(kind);
 			request.setAttribute("productList", productList);
 			nextPage = "/food/Result.jsp";
-		}else {
+		}else if(action.equals("/Purchase.do")){
+			nextPage = "/food/Purchase.jsp";
+		}else if(action.equals("/Main.do")) {
+			List<ProductVO> allList = productDAO.showAll();
+			request.setAttribute("allList", allList);
+			nextPage = "/Main.jsp";
+		}
+		else {
 			List<ProductVO> productorsList = productDAO.listProducts(id);
 			request.setAttribute("productorsList", productorsList);
 		}

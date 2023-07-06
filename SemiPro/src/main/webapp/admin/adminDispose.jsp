@@ -31,12 +31,10 @@
 			}	
 	 }
 	 
-	 function textChk(){
-		 var text = document.getElementById("num");
-		 if(!text){
-			alert('폐기할 수량을 입력해주세요!');
-			return false;
-		 }else{return true;}
+	 function textChk(name){
+		 var name = name;
+		 var num = prompt("폐기할 수량을 입력해주세요.");
+		 location.href="adminDispose_ok.jsp?name="+name+"&num="+num;
 	 }
 </script>
 </head>
@@ -66,7 +64,7 @@
 	</aside>
 	
 	<section>
-	<form action="" onSubmit="return textChk()">
+	
 	<table>
 	<tr><th>상품명</th><th>종류</th><th>재고량</th><th>납품자id</th><th>납품일자</th><th></th></tr>
 	<%
@@ -75,16 +73,12 @@
 	ResultSet rs = pstmt.executeQuery();
 	
 	while(rs.next()){%>
-		<tr><td><%=rs.getString("name") %></td><td><%=rs.getString("kind") %></td><td><%=rs.getInt("many") %></td>
+		<tr style="height:30px"><td><%=rs.getString("name") %></td><td><%=rs.getString("kind") %></td><td><%=rs.getInt("many") %></td>
 			<td><%=rs.getString("productor_id") %></td><td><%=rs.getString("date") %></td>
-			<td><input type=hidden name="name" value="<%=rs.getString("name") %>"/>
-			<input type=hidden name="many" value="<%=rs.getInt("many") %>"/>
-			<input type=text name=num id="num"/><b>개</b><br>
-			<input type=submit value="폐기하기"/>
+			<td><button onclick="textChk('<%=rs.getString("name") %>')">폐기하기</button></td></tr>
 	<%}
 	%>
 	</table>
-	</form>
 	</section>
 </div>
 </body>

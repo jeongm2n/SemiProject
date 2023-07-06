@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"  />  
-<%
+<% 
 request.setCharacterEncoding("UTF-8");
-%>  
+%> 
 
 <%@page session="true"%>
 
@@ -75,7 +75,7 @@ request.setCharacterEncoding("UTF-8");
 		<button style="float:right" onclick="return logout()">로그아웃</button>
 	<%}
 %>
-	<button style="float:right" onclick="location.href='../Main.jsp'">홈으로</button>
+	<button style="float:right" onclick="location.href='${contextPath}/product/Main.do'">홈으로</button>
 	<header class="shadow">MLP&nbsp;쇼핑몰</header>
 	<nav>
 		<ul id="menu">
@@ -94,9 +94,9 @@ request.setCharacterEncoding("UTF-8");
 		<c:forEach var="food" items="${productList }">
 			<div class="div">
 				<div style="float:left;width:35%;height:98%;position:relative;overflow:hidden">
-				<img src="../img/${food.img }"/></div>
+				<img class="img" src="../img/${food.img }"/></div>
 				<div style="float:right;width:65%;height:100%;display:table">
-				<form action=Purchase.jsp onSubmit="return login_chk()">
+				<form action=Purchase.do onSubmit="return login_chk()">
 				<table style="width:100%;text-align:center;margin-top:12%">
 					<tr>
 					<td><b>상품명</b> : ${food.name }</td>

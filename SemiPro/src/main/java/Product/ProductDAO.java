@@ -39,7 +39,7 @@ public class ProductDAO {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			String query = "select * from product '" + id + "'";
+			String query = "select * from product where productor_id = '" + id + "'";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
@@ -49,11 +49,10 @@ public class ProductDAO {
 				String Kind = rs.getString("kind");
 				String Many = rs.getString("many");
 				String date = rs.getString("date");
-				//Date date = rs.getDate("date");
 				
-				//ProductVO productVO = new ProductVO(name, Kind, Many, id, date);
+				ProductVO productVO = new ProductVO(name, Kind, Many, id, date);
 				
-				//productsList.add(productVO);
+				productsList.add(productVO);
 				
 			}
 			rs.close();
@@ -141,6 +140,34 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return productList;
+	}
+	
+	public List<ProductVO> showAll(){
+		List<ProductVO> allList = new ArrayList<ProductVO>();
+		try {
+			try {
+				connDB();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+
+			String sql = "select img, name from product order by many";
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String img = rs.getString("img");
+					
+				ProductVO productVO = new ProductVO(img,name);
+				allList.add(productVO);
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return allList;
 	}
 	
 

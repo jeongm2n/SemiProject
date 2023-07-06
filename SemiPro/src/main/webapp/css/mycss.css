@@ -105,7 +105,7 @@
        	border : 1px solid #999;
     }
         
-   img{
+   .img{
    		border : 1px solid #999;
    		position : absolute;
    		top : 50%;
@@ -114,5 +114,23 @@
    		height : auto;
    		transform : translate(-50%,-50%)
    }
-    
+   
+   .container{
+   		display : flex;
+   		flex-wrap: wrap;
+   		padding-left : 6%;
+   }
+   
+   .item{
+   		border : 1px solid #999;
+   		width : 260px;
+   		text-align : center;
+   		margin-right : 2%;
+   		margin-bottom : 1%;
+   }
+   
+   .mainimg{
+   		width : 260px;
+   		border : 1px solid #999;
+   }
    

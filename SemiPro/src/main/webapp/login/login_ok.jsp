@@ -25,11 +25,11 @@
 			session.setAttribute("id",rs.getString("id"));
 			String str1 = "<script>alert('로그인에 성공했습니다!');";
 			if(table.equals("customer")){
-				String str2 = str1 + "location.replace('../Main.jsp');</script>";
+				String str2 = str1 + "location.replace('../product/Main.do');</script>";
 				out.println(str2);
 			}
 			else if(table.equals("productor")){
-				String str2 = str1 + "location.replace('../productor/productor.jsp');</script>";
+				String str2 = str1 + "location.replace('../product/listProducts.do');</script>";
 				out.println(str2);
 			}
 			else if(table.equals("manager")){

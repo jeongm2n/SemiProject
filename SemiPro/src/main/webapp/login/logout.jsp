@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%session.removeAttribute("id"); 
-	out.println("<script>location.replace('../Main.jsp')</script>");
+	out.println("<script>location.replace('../product/Main.do')</script>");
 	%>
 </body>
 </html>

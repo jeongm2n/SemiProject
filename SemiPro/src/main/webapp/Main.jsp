@@ -14,7 +14,7 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="UTF-8">
 <title>MLP 쇼핑몰</title>
-<link rel="stylesheet" href="./css/mycss.css">
+<link rel="stylesheet" href="${contextPath}/css/mycss.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 	 $(document).ready(function(){
@@ -27,14 +27,14 @@ request.setCharacterEncoding("UTF-8");
 	 
 	 function loginpage(){
 		 if(true){
-			 window.location.href="./login/login.jsp";
+			 window.location.href="${contextPath}/login/login.jsp";
 		 }
 	 }
 	 
 	function logout(){
 		if(confirm('로그아웃 하시겠습니까?')){
 			alert('로그아웃 되었습니다.');
-			window.location.href="./login/logout.jsp";
+			window.location.href="${contextPath}/login/logout.jsp";
 			return true;
 		}
 		else{
@@ -78,9 +78,13 @@ request.setCharacterEncoding("UTF-8");
 	</div>
 	<section>
 	<h1>전체 상품</h1>
-	<table>
-		
-	</table>
+	<div class="container">
+		<c:forEach var="food" items="${allList }">
+			<div class="item">
+			<img class="mainimg" src="../img/${food.img }"/><br>
+			<b>${food.name }</b></div>
+		</c:forEach>
+	</div>
 	</section>
 </div>
 </body>

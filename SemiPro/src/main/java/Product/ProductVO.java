@@ -48,6 +48,12 @@ public class ProductVO {
 		this.id = id;
 	}
 	
+	public ProductVO(String img, String name) {
+		super();
+		this.img = img;
+		this.name = name;
+	}
+	
 	public String getCompany() {
 		return company;
 	}

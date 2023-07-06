@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.*,Product.*" isELIgnored="false"
     pageEncoding="UTF-8"%>
     
     <%@page session="true"%>
@@ -27,7 +27,7 @@
 	pstmt.executeUpdate();
 	pstmt2.executeUpdate();
 	
-	out.println("<script>alert('구매되셨습니다.'); location.replace('../Main.jsp');</script>");
+	out.println("<script>alert('구매되셨습니다.'); location.replace('../product/Main.do');</script>");
 %>
 </body>
 </html>
