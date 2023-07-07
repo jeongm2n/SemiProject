@@ -15,14 +15,14 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="UTF-8">
 <title>MLP 쇼핑몰</title>
 <link rel="stylesheet" href="${contextPath}/css/mycss.css">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> <!-- 제이쿼리 사용을 위함 -->
 <script>
 	 $(document).ready(function(){
 		  var currentPosition = parseInt($("#quickmenu").css("top"));
 		  $(window).scroll(function() {
 		    var position = $(window).scrollTop(); 
 		    $("#quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
-		  });
+		  });				/* 퀵메뉴를 위치시킬 스크롤 값(top:position) + 현재 스크롤의 위치(currentPosition) */
 		});
 	 
 	 function loginpage(){
@@ -43,10 +43,10 @@ request.setCharacterEncoding("UTF-8");
 	 }
 	 
 	 function goTop(){
-		 window.scrollTo(0,0);
+		 window.scrollTo(0,0); /* 스크롤을 제일 위로 올림 */
 	 }
 	 function goBottom(){
-		 window.scrollTo(0,document.body.scrollHeight);
+		 window.scrollTo(0,document.body.scrollHeight); /* 현재 스크롤의 가장 아래로 내림  */
 	 }
 	 
 </script>
@@ -64,7 +64,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 	<header class="shadow">MLP&nbsp;쇼핑몰</header>
 	<nav>
-		<ul id="menu">
+		<ul id="menu"> <!-- 버튼을 클릭하면 서블릿인 product의 showProducts.do 액션으로 str의 값이 넘어감 -->
 			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=채소'">채소</button>
 			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=육류'">육류</button>
 			<li id="menu_li"><button onclick="location.href='${contextPath}/product/showProducts.do?str=유제품'">유제품</button>
@@ -80,7 +80,7 @@ request.setCharacterEncoding("UTF-8");
 	<h1>전체 상품</h1>
 	<div class="container">
 		<c:forEach var="food" items="${allList }">
-			<div class="item">
+			<div class="item">		<!-- 제품 이미지와 제품명 불러오기 -->
 			<img class="mainimg" src="../img/${food.img }"/><br>
 			<b>${food.name }</b></div>
 		</c:forEach>

@@ -108,7 +108,7 @@ public class ProductDAO {
 		}
 	}
 	
-	public List<ProductVO> showProducts(String str) {
+	public List<ProductVO> showProducts(String str) { //Result.jsp에 상품 종류별로 나누기 위함
 		List<ProductVO> productList = new ArrayList<ProductVO>();
 		try {
 			try {
@@ -119,6 +119,7 @@ public class ProductDAO {
 			
 			String kind = str;
 			String sql = "select product.name,many,img,productor_id,company,date from product,productor where product.productor_id=productor.id and kind='"+str+"'";
+			//종류별 상품정보를 가져오는 쿼리문
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -130,7 +131,9 @@ public class ProductDAO {
 				String id = rs.getString("productor_id");
 					
 				ProductVO productVO = new ProductVO(img,name,kind,many,id,company,date);
+				//ProductVO 생성자를 호출하여 각 상품별로 상품정보가 담긴 productVO 객체 생성
 				productList.add(productVO);
+				//리턴할 결과값인 productList에 productVO의 정보들을 add 
 					
 			}
 			rs.close();
@@ -142,7 +145,7 @@ public class ProductDAO {
 		return productList;
 	}
 	
-	public List<ProductVO> showAll(){
+	public List<ProductVO> showAll(){ //Main.jsp를 위한 함수
 		List<ProductVO> allList = new ArrayList<ProductVO>();
 		try {
 			try {
@@ -152,6 +155,7 @@ public class ProductDAO {
 			}
 
 			String sql = "select img, name from product order by many";
+			//모든 제품의 이미지, 제품명 정보를 수량에 맞게 오름차순으로 정렬하여 값을 가져오는 쿼리문
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -159,7 +163,9 @@ public class ProductDAO {
 				String img = rs.getString("img");
 					
 				ProductVO productVO = new ProductVO(img,name);
+				//ProductVO 생성자를 호출하여 각 상품별로 상품정보가 담긴 productVO 객체 생성
 				allList.add(productVO);
+				//리턴할 결과값인 allList에 productVO의 정보들을 add 
 			}
 			rs.close();
 			pstmt.close();

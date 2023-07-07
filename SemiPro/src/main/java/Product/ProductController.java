@@ -116,18 +116,21 @@ public class ProductController extends HttpServlet {
 				e.printStackTrace();
 			}
 			nextPage = "/product/listProducts.do";
-		}else if(action.equals("/showProducts.do")){
-			String kind = request.getParameter("str");
+		}else if(action.equals("/showProducts.do")){  //Result.jsp에 제품 종류별로 화면에 띄우기 위한 action
+			String kind = request.getParameter("str"); //Main.jsp, Result.jsp에서 넘어온 str을 변수 kind에 저장
 			System.out.println("str="+kind);
-			List<ProductVO> productList = productDAO.showProducts(kind);
+			List<ProductVO> productList = productDAO.showProducts(kind); 
+			//ProductDAO.java의 showProducts 함수에 kind를 매개변수로 보내서 실행한 후 productList에 결과값들을 담음 
 			request.setAttribute("productList", productList);
-			nextPage = "/food/Result.jsp";
-		}else if(action.equals("/Purchase.do")){
-			nextPage = "/food/Purchase.jsp";
-		}else if(action.equals("/Main.do")) {
+			//productList라는 객체에 productList를 저장
+			nextPage = "/food/Result.jsp"; //food 디렉토리의 Result.jsp로 이동
+		}else if(action.equals("/Purchase.do")){ //구매를 위한 action
+			nextPage = "/food/Purchase.jsp"; //food 디렉토리의 Purchase.jsp로 이동
+		}else if(action.equals("/Main.do")) { //Main.jsp를 띄우기 위한 action
 			List<ProductVO> allList = productDAO.showAll();
-			request.setAttribute("allList", allList);
-			nextPage = "/Main.jsp";
+			//ProductDAO의 showAll 함수를 실행시켜 모든 상품에 대한 이미지, 제품명을 allList에 담음
+			request.setAttribute("allList", allList); //allList라는 객체에 allList를 저장
+			nextPage = "/Main.jsp"; //Main.jsp로 이동
 		}
 		else {
 			List<ProductVO> productorsList = productDAO.listProducts(id);
