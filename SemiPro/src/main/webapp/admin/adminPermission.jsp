@@ -60,7 +60,7 @@
 	<section>
 	<table>
 	<caption><b>승인 대기중</b></caption>
-		<tr style="text-align:center;background:rgb(111,167,235);"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>기업명</th><th></th><th></th></tr>
+		<tr class="toptr"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>기업명</th><th></th><th></th></tr>
 	<% String sql="select * from regist"; /* 승인 전 테이블인 regist의 정보 가져옴 */
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();

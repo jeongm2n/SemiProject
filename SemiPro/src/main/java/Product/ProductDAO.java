@@ -176,6 +176,39 @@ public class ProductDAO {
 		return allList;
 	}
 	
+	public ProductVO showOne(String str) {
+		ProductVO product = new ProductVO();
+		try {
+			try {
+				connDB();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+
+			String sql = "select product.name,kind,many,img,productor_id,company,date from product,productor where product.productor_id=productor.id and product.name='"+str+"'";
+			//제품의 정보를 수량에 맞게 오름차순으로 정렬하여 값을 가져오는 쿼리문
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String name = rs.getString("product.name");
+				String kind = rs.getString("kind");
+				String many = rs.getString("many");
+				String id = rs.getString("productor_id");
+				String company = rs.getString("company");
+				String img = rs.getString("img");
+				String date = rs.getString("date");
+					
+				 product = new ProductVO(img,name,kind,many,id,company,date);
+				//ProductVO 생성자를 호출하여 해당 상품의 상품정보가 담긴 product 객체 생성
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return product;
+	}
 
 	private void connDB() {
 

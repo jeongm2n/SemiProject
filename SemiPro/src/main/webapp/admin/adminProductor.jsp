@@ -59,13 +59,14 @@
 	
 	<section>
 	<table>
-		<tr style="text-align:center;background:rgb(111,167,235);"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>기업명</th><th></th></tr>
+	<caption>납품업체관리</caption>
+		<tr class="toptr"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>기업명</th><th></th></tr>
 	<% String sql="select * from productor";
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();
 	
 	while(rs.next()){%>
-		<tr style="text-align:center"><td><%=rs.getString("id") %></td><td><%=rs.getString("pwd") %></td><td><%=rs.getString("name") %></td>
+		<tr><td><%=rs.getString("id") %></td><td><%=rs.getString("pwd") %></td><td><%=rs.getString("name") %></td>
 		<td><%=rs.getString("email") %></td><td><%=rs.getString("company") %></td>
 		<td><button onclick="location.href='productor_delete.jsp?id=<%=rs.getString("id")%>'">삭제</button></td></tr>
 	<%}%>

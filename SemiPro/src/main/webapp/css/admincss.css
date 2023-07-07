@@ -18,7 +18,7 @@
 	}
 	
 	/* 헤더, 네비게이션, 섹션, aside의 공통적인 css */
-	header, nav, section, aside{
+	header, section, aside{
 		border : 1px solid #999;
 		margin-bottom : 20px;
 	}
@@ -29,16 +29,20 @@
 		background-color : #ced4da;
 		text-align : center;
 		font-size : 50pt;
-		height : 100px;
+		height : 140px;
 		margin-left : 10%;
 		margin-right : 10%;
+		margin-top : 2%;
+		margin-bottom : 20px;
+		border-radius: 20px;
+		line-height : 100pt;
+		letter-spacing : .5em;
 	}
 	
 	/* 네비게이션의 css */
 	nav{
-		border : 1px solid #999;
 		width : 80%;
-		height : 40px;
+		height : 50px;
 		vertical-align : middle;
 		margin-left : 10%;
 		margin-right : 10%;
@@ -61,11 +65,15 @@
     
     #menu_li button{
     	width : 100%;
-   		background-color : #E5E4E2; 
+   		background-color : #F0F8FF; 
     	display : block;
     	padding : 5px;
     	text-align : center;
     	height : 100%;
+    	font-weight : bold;
+    	font-size : 20px;
+    	letter-spacing : .5em;
+    	border-radius : 10px;
     }
     
     #menu_li button:hover{/* 해당 메뉴에 마우스 올려두고 있을 때 */
@@ -119,15 +127,31 @@
 	.shadow{
 		text-shadow : 5px 7px 10px gray;
 	}
-    
-    table,th,tr,td{
-    	border: 1px solid #444444;
-    }
        
    	table{
    		text-align : center;
    		margin-left : 5%;
    		width : 90%;
    		border-collapse : collapse;
-   		border: 1px solid #444444;
+   		margin-top : 30px;
+   	}
+   	
+   	td,th{
+   		border-bottom : 1px solid #393E46;
+		padding : 10px 5px;
+   	}
+   	
+   	th{
+   		border-top : 5px solid #393E46;
+   	}
+   	
+   	.toptr{
+   		text-align : center;
+   		background-color : #CFECEC;
+   	}
+   	
+   	caption{
+   		line-height : 160%;
+   		font-size : 20pt;
+   		font-weight : bold;
    	}

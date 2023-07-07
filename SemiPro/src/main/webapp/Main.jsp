@@ -3,7 +3,7 @@
     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"  />  
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>  
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -77,12 +77,12 @@ request.setCharacterEncoding("UTF-8");
 		<button style="width:100%;bgcolor:white" onclick="goBottom()">Bottom<br>맨 아래로</button>
 	</div>
 	<section>
-	<h1>전체 상품</h1>
+	<h1 style="margin-left:5%;">전체 상품</h1>
 	<div class="container">
 		<c:forEach var="food" items="${allList }">
 			<div class="item">		<!-- 제품 이미지와 제품명 불러오기 -->
-			<img class="mainimg" src="../img/${food.img }"/><br>
-			<b>${food.name }</b></div>
+			<img class="mainimg" src="${contextPath}/img/${food.img }"/><br>
+			<b style="font-size:14pt;">${food.name }</b></div>
 		</c:forEach>
 	</div>
 	</section>

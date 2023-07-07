@@ -32,10 +32,16 @@
 	 }
 	 
 	 function textChk(name){
-		 var name = name;
-		 var num = prompt("폐기할 수량을 입력해주세요.");
-		 location.href="adminDispose_ok.jsp?name="+name+"&num="+num;
-	 }
+	       var name = name;
+	       var num = prompt("폐기할 수량을 입력해주세요.");
+	       if(num){
+	          location.href="adminDispose_ok.jsp?name="+name+"&num="+num;
+	          return true;
+	       } else{
+	          return false;
+	       }
+	    }
+
 </script>
 </head>
 <body>
@@ -66,7 +72,8 @@
 	<section>
 	
 	<table>
-	<tr><th>상품명</th><th>종류</th><th>재고량</th><th>납품자id</th><th>납품일자</th><th></th></tr>
+	<caption>상품관리</caption>
+	<tr class="toptr"><th>상품명</th><th>종류</th><th>재고량</th><th>납품자id</th><th>납품일자</th><th></th></tr>
 	<%
 	String sql = "select * from product";
 	PreparedStatement pstmt = conn.prepareStatement(sql);

@@ -14,31 +14,16 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MLP 쇼핑몰</title>
+<title>상품 구매하기</title>
 <link rel="stylesheet" href="../css/mycss.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
 <%String user_id = (String)session.getAttribute("id"); %>
 <script>
-	 $(document).ready(function(){
-		  var currentPosition = parseInt($("#quickmenu").css("top"));
-		  $(window).scroll(function() {
-		    var position = $(window).scrollTop(); 
-		    $("#quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
-		  });
-		});
 	 
 	 function loginpage(){
 		 if(true){
 			 window.location.href="../login/login.jsp";
 		 }
-	 }
-	 
-	 function goTop(){
-		 window.scrollTo(0,0);
-	 }
-	 function goBottom(){
-		 window.scrollTo(0,document.body.scrollHeight);
 	 }
 	 
 	 function logout(){
@@ -60,7 +45,11 @@ request.setCharacterEncoding("UTF-8");
 			 return false;
 		 }
 		 else{
-			 return true;
+			 var num = document.getElementById("num").value;
+			 if(!num){
+				 alert('구매하실 수량을 입력해주세요!');
+				 return false;
+			 }else{return true;}
 		 }
 	 }
 </script>
@@ -86,25 +75,32 @@ request.setCharacterEncoding("UTF-8");
 		</ul>
 	</nav>
 	
-	<div id="quickmenu">
-		<button style="width:100%;bgcolor:white" onclick="goTop()">Top<br>맨 위로</button>
-		<button style="width:100%;bgcolor:white" onclick="goBottom()">Bottom<br>맨 아래로</button>
-	</div>
 	<section>
-		<c:forEach var="food" items="${productList }">
-			<div class="div" onclick="location.href='${contextPath}/product/oneFood.do?str=${food.name }'">
-				<div style="float:left;width:35%;height:98%;position:relative;overflow:hidden">
-				<img class="img" src="../img/${food.img }"/></div>
-				<div style="float:right;width:65%;height:100%;display:table">
-				<table style="width:100%;text-align:center;margin-top:12%">
-					<tr>
-					<td><b>상품명</b><br><hr class="hr"><br>${food.name }</td>
-					<td><b>재고</b><br><hr class="hr"><br>${food.many }</td>
-					<td><b>납품업체</b><br><hr class="hr"><br>${food.company }</td>
+		<div style="padding-top:2%">
+			<table id="table2" style="width:100%;">
+			<tr><td style="width:50%" rowspan='7'><img style="width:100%" src="../img/${food.img }"/></td></tr>
+			<tr><th class="thtd">상품명</th><td class="thtd">${food.name }</td></tr>
+			<tr><th class="thtd">생산일자</th><td class="thtd">${food.date }</td></tr>
+			<tr><th class="thtd">남은 수량</th><td class="thtd">${food.many }</td></tr>
+			<tr><th class="thtd">카테고리</th><td class="thtd">${food.kind }</td></tr>
+			<tr><th class="thtd">납품업체</th><td class="thtd">${food.company }</td></tr>
+			<tr><th class="thtd">판매자ID</th><td class="thtd">${food.id }</td></tr>
+			</table>
+			<br>
+			
+			<form style="float:right;width:50%" action="${contextPath}/product/Purchase.do" onSubmit="return login_chk()">
+				<table style="width:100%">
+					<tr><td style="width:70%;font-size:13pt;text-align:right">정기 구매를 하시겠습니까?<p style="font-size:11pt;">혜택:배송비 무료, 20%할인<p></td>
+					<td style="width:30%;font-size:14pt;"><input type="radio" name="sub" value="o">예
+					<input type="radio" name="sub" value="o">아니오</tr>
+					<tr><td style="text-align:right"><input type="text" style="height:25px" name="num"/>
+					<input type="hidden" name="id" value="<%=user_id%>"/>
+					<input type="hidden" name="name" value="${food.name }"/>
+					<input type="hidden" name="productor_id" value="${food.id }"/></td>
+					<td style="text-align:center"><input type="submit" value="구매하기"/></td></tr>
 				</table>
-				</div>
-			</div>
-		</c:forEach>
+			</form>
+		</div>
 	</section>
 </div>
 </body>

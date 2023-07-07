@@ -58,8 +58,8 @@
 	
 	<section>
 	<table style="text-align:center">
-	<caption><b style="font-size:20pt">거래내역</b></caption>
-	<tr><th>고객id</th><th>구매상품</th><th>구매수량</th><th>납품자id</th><th>장기거래여부</th><th>구매일자</th></tr>
+	<caption>거래내역</caption>
+	<tr class="toptr"><th>고객id</th><th>구매상품</th><th>구매수량</th><th>납품자id</th><th>장기거래여부</th><th>구매일자</th></tr>
 	<%String sql = "SELECT * FROM purchase";
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();

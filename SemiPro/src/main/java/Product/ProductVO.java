@@ -37,7 +37,8 @@ public class ProductVO {
 		this.date = date;
 	}
 	
-	public ProductVO(String img, String name, String kind, String many, String id, String company, String date) {
+	public ProductVO(String img, String name, String kind, String many, String id, String company, String date) { 
+		//Result.jsp에 상품 정보를 띄우기 위한 객체 생성자
 		super();
 		this.name = name;
 		this.many = many;
@@ -48,7 +49,7 @@ public class ProductVO {
 		this.id = id;
 	}
 	
-	public ProductVO(String img, String name) {
+	public ProductVO(String img, String name) { //Main.jsp에 이미지, 제품명만 띄우기 위한 객체 생성자
 		super();
 		this.img = img;
 		this.name = name;

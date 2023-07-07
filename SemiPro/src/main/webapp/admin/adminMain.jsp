@@ -58,7 +58,8 @@
 	
 	<section>
 	<table>
-		<tr style="text-align:center;background:rgb(111,167,235);"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>전화번호</th><th>주소</th><th></th></tr>
+	<caption>회원관리</caption>
+		<tr class="toptr"><th>아이디</th><th>비밀번호</th><th>이름</th><th>이메일</th><th>전화번호</th><th>주소</th><th></th></tr>
 	<% String sql="select * from customer";
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	ResultSet rs = pstmt.executeQuery();

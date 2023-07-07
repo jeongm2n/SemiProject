@@ -131,6 +131,11 @@ public class ProductController extends HttpServlet {
 			//ProductDAO의 showAll 함수를 실행시켜 모든 상품에 대한 이미지, 제품명을 allList에 담음
 			request.setAttribute("allList", allList); //allList라는 객체에 allList를 저장
 			nextPage = "/Main.jsp"; //Main.jsp로 이동
+		}else if(action.equals("/oneFood.do")) {
+			String str = request.getParameter("str");
+			ProductVO food = productDAO.showOne(str);
+			request.setAttribute("food", food);
+			nextPage = "/food/oneFood.jsp";
 		}
 		else {
 			List<ProductVO> productorsList = productDAO.listProducts(id);
