@@ -11,9 +11,13 @@
 	#wrapper{
 		width : 100%;
 		text-align : left;
-		min-height : 400px;
+		min-height : 200px;
 		margin : 0 auto;
 		float: left;
+	}
+	
+	#wrapper header{
+		font-weight : bold;
 	}
 	
 	/*로그인/회원가입 버튼의 css*/
@@ -48,20 +52,18 @@
 	
 	
 	
-	/*퀵 메뉴의 css*/
+	/*입력 메뉴의 css*/
 	#product_input{
-		width : 28%;
+		width : 13%;
 		position : absolute;
 		top : 180px; 
-		right : 1%;
+		right : 10%;
 	}
   	
   	/*입력 테이블의 공통 css*/
   	#input_table{
   		color : #393E46;
-  		text-align : center;
-  		width:100%;
-  		float:right;
+  		text-align : left;
   	}
   	
   	#input_table a{
@@ -77,7 +79,7 @@
 		margin:auto;
 		color:#2f3858;
 		background-color : #f9f7f7;
-		border : 1px solid #393E46;
+		border : 3px solid #393E46;
 		border-radius : 20px;
   	}
  
@@ -87,8 +89,8 @@
 		padding : 10px;
 	}
   	
-  	#obj_name{
-  		width: 50px;
+  	#obj_name, #obj_amount{
+  		width: 60%;
 		height: 32px;
 		font-size: 15px;
 		border: 0;
@@ -98,36 +100,38 @@
 		background-color: rgb(233, 233, 233);
   	}
   	
-  	#obj_amount{
-  		width: 50px;
+  	#obj_kind {
+  		width: 37%;
 		height: 32px;
-		font-size: 15px;
+		font-size: 0.8vw;
 		border: 0;
 		border-radius: 15px;
 		outline: none;
 		padding-left: 10px;
 		background-color: rgb(233, 233, 233);
-  	}
-  	#obj_name{
-  		width: 50px;
-		height: 32px;
-		font-size: 15px;
-		border: 0;
-		border-radius: 15px;
-		outline: none;
-		padding-left: 10px;
-		background-color: rgb(233, 233, 233);
-  	}
-  	/* label 스타일 조정 */
-	.imgbtn {
-		text-align : center;
-	    display: flex;
-	    justify-content: center;
 	}
 	
-	label {
+	#obj_date {
+  		width: 55%;
+		height: 32px;
+		font-size: 0.8vw;
+		border: 0;
+		border-radius: 15px;
+		outline: none;
+		padding-left: 10px;
+		background-color: rgb(233, 233, 233);
+	}
+
+
+  	/* label 스타일 조정 */
+	#product_input .filelabel {
+		padding : 0% 5%;
+		border : 0.5px solid #393E46;
+		border-radius : 10px;
 	    cursor: pointer;
-	    font-size: 1em;
+		text-align : center;
+	    font-size: 1vw;
+	    background-color: rgb(233, 233, 233);
 	}
 	
 	/* 못생긴 기존 input 숨기기 */
@@ -136,16 +140,30 @@
 	}
   	
   	#btn2 {
+  		width : 30%;
   		text-align : center;
-		border: none;
+		border: 2px solid #393E46;
+		border-radius : 15px;
 		outline: none;
 		font-size: 0.9vw;
-		color: #393E46;
+		background-color: #393E46;
+		color: white;
 		cursor: pointer;
 		box-sizing: border-box;
-		background-color:transparent;
 	}
 	
+	#product_input .label{
+  		width:100%;
+  		color:#fff;
+  		display:block;
+  		color:#aaa;
+  		font-size:12px;
+  		height:15px;
+  		border-radius:2px;
+  		position:relative;
+  		display:inline-block;
+  		background:rgba(255,255,255,.1);
+	}
 	
 	
 
@@ -154,10 +172,9 @@
 	#productor_list{
 		color : #393E46;
 		text-align : center;
-		width:65%;
+		width:60%;
 		float:left;
-		margin-left:2.5%;
-
+		margin-left : 10%;
 	}
 	
 	/*납품 테이블 위 글씨 css*/
@@ -183,3 +200,7 @@
 	.list_tb th{
 		border-top : 5px solid #393E46;
 	}
+
+ 
+  	
+  	
